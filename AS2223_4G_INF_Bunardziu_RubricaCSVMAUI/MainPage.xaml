@@ -33,7 +33,7 @@
                 FontSize="27"/>
                 <Entry 
                     x:Name="TXT_Cognome" />
-                <Picker x:Name="CBX_Scelta">
+                <Picker x:Name="CBX_Scelta" HeightRequest="35">
                     <Picker.Items>
 
                     </Picker.Items>
@@ -53,16 +53,14 @@
                 x:Name="BTN_Visualizza"
                 Text="Visualizza"
                 Clicked="BTN_Visualizza_Clicked"/>
-            <ListView x:Name="LST_Elenco" ItemsSource="{Binding Rubrica}">
+            <ListView x:Name="LST_Elenco" ItemsSource="{Binding dsContatti}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <TextCell Text="{Binding dsContatti}"/>
+                        <TextCell Text="{Binding ItemName}"/>
                         
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-
-
 
         </VerticalStackLayout>
     </ScrollView>
