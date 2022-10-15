@@ -1,24 +1,49 @@
-﻿namespace AS2223_4G_INF_Bunardziu_RubricaCSVMAUI;
+﻿using System.Collections.ObjectModel;
+
+namespace AS2223_4G_INF_Bunardziu_RubricaCSVMAUI;
 
 public partial class MainPage : ContentPage
 {
-	int count = 0;
-
 	public MainPage()
 	{
 		InitializeComponent();
 	}
+    public class Item
+    {
+        public string ItemName { get; set; }
+    }
+    ObservableCollection<Item> dsContatti = new ObservableCollection<Item>();
+    static bool Scelto = false;
+    static int nRighe;
+    static int nColonne = 3;
+    static Contatti[] Dati;
 
-	private void OnCounterClicked(object sender, EventArgs e)
+    private async void BTN_File_Clicked(object sender, EventArgs e)
 	{
-		count++;
+        var FinestraFile = await Microsoft.Maui.Storage.FilePicker.PickAsync(); //inizializza una nuova variabile che contiene il File selezionato tramite il metodo FilePicker
+        if (FinestraFile != null)
+        {
+            TXT_File.Text = FinestraFile.FullPath; //.FileName ottiene l'indirizzo del file selezionato sulla finestra
+            Scelto = true; //aggiorno lo stato della variabile di stato
+        }
+        else
+        {
+            await DisplayAlert("ERRORE", "Non hai selezionato un File. Selezionarne uno per continuare.", "Ok"); //errore in caso non abbiamo scelto un file. 
+            return; //blocco la funzione
+        }
+        StreamReader Fi = new StreamReader(TXT_File.Text); //leggo il file .CSV
+        nRighe = File.ReadLines(TXT_File.Text).Count();
+        string temp = Fi.ReadLine();
+        Dati = new Contatti[nRighe];
+        for(int i = 0; i < nRighe; i++)
+        {
+            Dati[i] = new Contatti(temp);
+        }
+    }
 
-		if (count == 1)
-			CounterBtn.Text = $"Clicked {count} time";
-		else
-			CounterBtn.Text = $"Clicked {count} times";
+	private void BTN_Visualizza_Clicked(object sender, EventArgs e)
+	{
 
-		SemanticScreenReader.Announce(CounterBtn.Text);
 	}
 }
 

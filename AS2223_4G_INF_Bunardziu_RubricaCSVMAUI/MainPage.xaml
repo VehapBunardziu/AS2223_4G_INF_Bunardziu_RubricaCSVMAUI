@@ -19,22 +19,50 @@
                 <Entry 
                     x:Name="TXT_File" 
                     IsReadOnly="False"/>
-                
-            </HorizontalStackLayout>
-        
-            <Label
-                Text="Welcome to .NET Multi-platform App UI"
-                SemanticProperties.HeadingLevel="Level2"
-                SemanticProperties.Description="Welcome to dot net Multi platform App U I"
-                FontSize="18"
-                HorizontalOptions="Center" />
 
+                <Button 
+                    x:Name="BTN_File"
+                    Text="..."
+                    Clicked="BTN_File_Clicked"/>
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout
+                HorizontalOptions="Center">
+                <Label
+                Text="Cognome"
+                FontSize="27"/>
+                <Entry 
+                    x:Name="TXT_Cognome" />
+                <Picker x:Name="CBX_Scelta">
+                    <Picker.Items>
+
+                    </Picker.Items>
+
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Contiene</x:String>
+                            <x:String>Inizia</x:String>
+                            <x:String>Finisce</x:String>
+                            <x:String>Stampa tutto</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+            </HorizontalStackLayout>
             <Button
-                x:Name="CounterBtn"
-                Text="Click me"
-                SemanticProperties.Hint="Counts the number of times you click"
-                Clicked="OnCounterClicked"
-                HorizontalOptions="Center" />
+                WidthRequest="100"
+                x:Name="BTN_Visualizza"
+                Text="Visualizza"
+                Clicked="BTN_Visualizza_Clicked"/>
+            <ListView x:Name="LST_Elenco" ItemsSource="{Binding Rubrica}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding dsContatti}"/>
+                        
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+
 
         </VerticalStackLayout>
     </ScrollView>
