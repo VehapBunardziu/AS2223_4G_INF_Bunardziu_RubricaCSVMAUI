@@ -33,10 +33,11 @@ public partial class MainPage : ContentPage
         }
         StreamReader Fi = new StreamReader(TXT_File.Text); //leggo il file .CSV
         nRighe = File.ReadLines(TXT_File.Text).Count();
-        string temp = Fi.ReadLine();
+        
         Dati = new Contatti[nRighe];
         for(int i = 0; i < nRighe; i++)
         {
+            string temp = Fi.ReadLine();
             Dati[i] = new Contatti(temp);
         }
     }
@@ -71,7 +72,7 @@ public partial class MainPage : ContentPage
                     {
                         if (Dati[i].Cognome.ToUpper().StartsWith(Parola.ToUpper())) //mando tutto in uppercase per evitare problemi inutili. Uso lo .StartsWith() per cercare i risultati combacianti.
                         {
-                            dsContatti.Add(new Item() { ItemName = $"{Dati[i].Cognome} {Dati[i].Nome}" }); //stampo i risultati.
+                            dsContatti.Add(new Item() { ItemName = $"{Dati[i].Cognome} {Dati[i].Nome} {Dati[i].Citta}" }); //stampo i risultati.
                             
                         }
                     }
@@ -84,7 +85,7 @@ public partial class MainPage : ContentPage
                     {
                         if (Dati[i].Cognome.ToUpper().Contains(Parola.ToUpper())) //mando tutto in uppercase per evitare problemi inutili. Uso lo .Contains() per cercare i risultati combacianti.
                         {
-                            dsContatti.Add(new Item() { ItemName = $"{Dati[i].Cognome} {Dati[i].Nome}" }); //stampo i risultati.
+                            dsContatti.Add(new Item() { ItemName = $"{Dati[i].Cognome} {Dati[i].Nome} {Dati[i].Citta}" }); //stampo i risultati.
                         }
 
                     }
@@ -97,7 +98,7 @@ public partial class MainPage : ContentPage
                     {
                         if (Dati[i].Cognome.ToUpper().EndsWith(Parola.ToUpper())) //mando tutto in uppercase per evitare problemi inutili. Uso lo .EndsWith() per cercare i risultati combacianti.
                         {
-                            dsContatti.Add(new Item() { ItemName = $"{Dati[i].Cognome} {Dati[i].Nome}" }); //stampo i risultati.
+                            dsContatti.Add(new Item() { ItemName = $"{Dati[i].Cognome} {Dati[i].Nome} {Dati[i].Citta}" }); //stampo i risultati.
                         }
                     }
                     LST_Elenco.ItemsSource = dsContatti;
@@ -107,9 +108,9 @@ public partial class MainPage : ContentPage
                     dsContatti.Clear(); //pulisco la LISTBOX prima di scrivere 
                     for (int i = 0; i < nRighe; i++)
                     {
-                        dsContatti.Add(new Item() { ItemName = $"{Dati[i].Cognome} {Dati[i].Nome}" }); //stampo tutti i nomi cognomi e città contenute all'interno del file. 
+                        dsContatti.Add(new Item() { ItemName = $"{Dati[i].Cognome} {Dati[i].Nome} {Dati[i].Citta}" }); //stampo tutti i nomi cognomi e città contenute all'interno del file. 
                     }
-                    LST_Elenco.ItemsSource = dsContatti;
+                    LST_Elenco.ItemsSource = dsContatti; 
                 }
             }
             else

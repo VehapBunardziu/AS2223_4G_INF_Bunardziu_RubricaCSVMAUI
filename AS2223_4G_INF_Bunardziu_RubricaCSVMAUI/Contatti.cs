@@ -24,8 +24,8 @@ namespace AS2223_4G_INF_Bunardziu_RubricaCSVMAUI
         public Contatti (string temp)
         {
                 string[] temparr = temp.Split(',');//creo un array temporaneo in cui mi salvo il valore restituito da split restituito però è un array quindi lo salvo dentro al mio array di stringhe temporaneo
-                Cognome = temparr[0];
-                Nome = temparr[1];
+                Nome = temparr[0];
+                Cognome = temparr[1];
                 Citta= temparr[2];
         }
     }
